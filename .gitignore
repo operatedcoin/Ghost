@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# React Native dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Expo-specific
+.expo/
+.expo-shared/
+.expo-settings.json
+
+# Build files
+build/
+*.apk
+*.ipa
+
+# Environment variables
+.env
+
+# Dependency folders
+ios/Pods/
+android/.gradle/
+android/app/build/
+android/build/
+
+# IDE files
+.vscode/
+*.swp
