@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Story Dot",
-    "slug": "message-bank",
+    "name": "Green Thumb",
+    "slug": "green-thumb",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#80C271"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -37,7 +37,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.robertpolmear.messagebank"
+      "bundleIdentifier": "com.operatedcoin.greenthumb"
     },
     "android": {
       "adaptiveIcon": {
@@ -49,14 +49,14 @@
         "android.permission.BLUETOOTH_ADMIN",
         "android.permission.BLUETOOTH_CONNECT"
       ],
-      "package": "com.robertpolmear.messagebank"
+      "package": "com.operatedcoin.greenthumb"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "33c4c1ac-5d79-438a-835a-88a9fca98ba5"
+        "projectId": "640314d1-883c-4583-a047-fbdf1071637c"
       }
     }
   }

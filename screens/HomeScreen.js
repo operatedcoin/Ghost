@@ -23,7 +23,7 @@ export default function HomeScreen({ navigation }) {
         <View className="mx-4 items-center h-full flex-col justify-end flex grow">
         <View className="grow" />
           <Text className="text-neutral-900 text-2xl font-bold">
-              Story Dot</Text>
+              Green Thumb</Text>
               <Text>
             Intro text goes here
           </Text>

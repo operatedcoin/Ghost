@@ -13,7 +13,7 @@ export default function Header({ isModalVisible, setModalVisible }) {
         <StatusBar style="dark" />
         <View className="flex-row justify-between items-center mx-4">
           <Text className="text-neutral-900 text-2xl font-bold">
-              Story Dot</Text>
+              Green Thumb</Text>
         <TouchableOpacity onPress={() => setModalVisible(true)}>
           <Ionicons name="information-circle-outline" size={24} color="black" />
         </TouchableOpacity>

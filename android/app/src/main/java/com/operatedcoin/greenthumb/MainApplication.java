@@ -1,4 +1,4 @@
-package com.robertpolmear.messagebank;
+package com.operatedcoin.greenthumb;
 
 import android.app.Application;
 import android.content.res.Configuration;

@@ -81,9 +81,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.robertpolmear.messagebank'
+    namespace 'com.operatedcoin.greenthumb'
     defaultConfig {
-        applicationId 'com.robertpolmear.messagebank'
+        applicationId 'com.operatedcoin.greenthumb'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
