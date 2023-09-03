@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet, Animated} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useRef } from 'react';
 
 const LoadingSpinner = () => {
-    const rotateValue = new Animated.Value(0);
+  const rotateValue = useRef(new Animated.Value(0)).current;
   
     const startRotation = () => {
       Animated.loop(

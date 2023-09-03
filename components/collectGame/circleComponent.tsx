@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, View } from 'react-native';
 import WeedIcon from './weedIcon';
 import * as Haptics from 'expo-haptics';
 
-function CircleComponent({ isActive, beaconName, onPress }) {
+function CircleComponent({ isActive, beaconName, onPress, playInactiveAudio, beaconData }) {
 
   const beacondetectHaptic = async () => {
     // Repeat the pattern 3 times
@@ -31,11 +31,11 @@ function CircleComponent({ isActive, beaconName, onPress }) {
   }, [isActive, isTapped]); 
 
   const getCircleStyle = () => {
-    if (isActive && isTapped) return "border-white bg-green-500"
+    if (isActive && isTapped) return "border-white bg-green-500";
     if (isTapped) return "border-green-500 bg-transparent";
     if (isActive) return "border-white bg-green-500";
-    return "border-gray-500 bg-transparent";
-  };
+    return "border-neutral-500 bg-transparent";
+  };  
 
   const getCircleContent = () => {
     if (isActive && isTapped) {
@@ -47,16 +47,22 @@ function CircleComponent({ isActive, beaconName, onPress }) {
     if (isActive) {
       return <Text className="text-white text-center font-bold text-[9px] uppcase">TAP TO COLLECT</Text>;
     }
-    return  <WeedIcon size={45} fill="#6B7280" />;
+    return <WeedIcon size={45} fill="#737373" />;
   };
 
   return (
     <TouchableOpacity 
       onPress={() => { 
-        setIsTapped(true);
-        onPress(beaconName);
-      }}
-      disabled={!isActive} // Only depending on isActive for disabling
+        console.log("Circle tapped");
+
+        if (!isActive) {
+          playInactiveAudio(beaconData[beaconName].inactiveAudioPath);
+        } else {
+          setIsTapped(true);
+          onPress(beaconName);
+        }
+      }}    
+      disabled={isTapped && !isActive}
       className={`w-16 h-16 rounded-full border-2 m-1 justify-center items-center ${getCircleStyle()}`}
     >
      <View>

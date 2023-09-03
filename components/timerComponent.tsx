@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Text, View } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/appNavigation';
+
+type TimerComponentProps = {
+  duration: number;
+  nextScreen: keyof RootStackParamList;
+  isModalVisible: boolean;
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
 
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
@@ -8,9 +17,9 @@ function formatTime(seconds) {
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   }
 
-function TimerComponent({ duration, nextScreen, isModalVisible }) {
+  const TimerComponent: React.FC<TimerComponentProps> = ({ duration, nextScreen, isModalVisible, navigation }) => {
+    console.log(navigation);
     const [timeLeft, setTimeLeft] = useState(duration);
-    const navigation = useNavigation();
 
     useEffect(() => {
         // Only proceed if the modal is not visible
@@ -21,7 +30,7 @@ function TimerComponent({ duration, nextScreen, isModalVisible }) {
             return () => clearTimeout(timerId);
           } else {
             // When time is up, navigate to the next screen
-            navigation.navigate(nextScreen as any);
+            navigation.replace(nextScreen as any);
           }
         }
       }, [timeLeft, navigation, nextScreen, isModalVisible]);

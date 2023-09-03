@@ -16,18 +16,19 @@ export default function ChapterFour({ navigation }) {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [isHeaderModalVisible, setHeaderModalVisible] = useState(false);
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
+  const [collectedWeedsCount, setCollectedWeedsCount] = useState(0);
 
   const handleGoToHome = () => {
-    navigation.navigate('Home');
+    navigation.navigate('ChapterFive');
   };
 
   useEffect(() => {
     if (isFocused) {
       setTimeout(() => {
-        playAudio(require('../audio/MysteryTheme.mp3'));
-      }); // delaying by half a second
+        playAudio(require('../audio/MysteryLight.mp3'));
+      });
     } else {
-      stopAudio(require('../audio/MysteryTheme.mp3'));
+      stopAudio(require('../audio/MysteryLight.mp3'));
     }
 }, [isFocused]);
 
@@ -37,6 +38,10 @@ export default function ChapterFour({ navigation }) {
       setIsFirstLoad(false);
     }
   }, [isFirstLoad]);
+
+  useEffect(() => {
+    console.log("Collected weeds count:", collectedWeedsCount);
+}, [collectedWeedsCount]);
 
   return (
     <View className="bg-neutral-100 flex-1">
@@ -52,20 +57,27 @@ export default function ChapterFour({ navigation }) {
     <View className="h-fit flex-col justify-end flex grow space-y-3">
 
      <View className="my-8">
-      <TimerComponent isModalVisible={isBottomSheetVisible || isHeaderModalVisible} duration={1000} nextScreen="Home" />
+      <TimerComponent 
+          isModalVisible={isBottomSheetVisible || isHeaderModalVisible} 
+          duration={540} nextScreen="Failed"  
+          navigation={navigation}/>
     </View>
         <View className="bg-white mx-4 p-4 rounded-xl">
           <Text className="text-neutral-900 text-center text-2xl font-bold">Collect the Weeds</Text>
-          <Text className="text-neutral-900 text-center text-xs pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor ipsum at arcu condimentum, sed fermentum turpis aliquam. Fusce a dui egestas</Text>
+          <Text className="text-neutral-900 text-center text-xs pt-2">Hold the device close the centre of the weeds to collect a sample.</Text>
         </View>
 
-        <BeaconCollect goToHome={handleGoToHome} beaconData={weedsDataLookup} />
+        <BeaconCollect 
+          goToHome={handleGoToHome} 
+          beaconData={weedsDataLookup}
+          onWeedsCollected={setCollectedWeedsCount}
+        />
 
         <BottomSheetModal
         isVisible={isBottomSheetVisible} 
         onClose={() => setBottomSheetVisible(false)}
-        title="Chapter Title Here"
-        content="Some description or instruction text here"
+        title="Stop the Spread!"
+        content="Sources say we have 9 minutes before the infestation grown. Collect the samples before the timer runs out."
       />
           
      </View>  

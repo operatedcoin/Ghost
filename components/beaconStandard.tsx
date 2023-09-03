@@ -107,12 +107,12 @@ const Beacon = ({ beacons }: BeaconProps) => {
             <View className="grow">
                   <View className="flex-row bg-white rounded-full p-1 px-2 items-center justify-center">
                     <ScanIndicator />
-                    <Text className="text-black text-[10px]">Scanning</Text>
+                    <Text className="text-black text-[10px]">Scanningtt</Text>
                   </View>
             </View>
             <View className="pb-4"><Ionicons name="radio" size={30} style={{ color: 'rgb(163, 163, 163)' }} /></View>
-            <Text className="text-neutral-400 font-bold pb-1">No Story Dots Detected</Text>
-            <Text className="text-neutral-400 text-xs">Walk around to unlock stories</Text>
+            <Text className="text-neutral-400 font-bold pb-1">Nothing is growing here.</Text>
+            <Text className="text-neutral-400 text-xs">Place this device next to strange weeds to scan their bio data.</Text>
             <View className="grow"></View>
           </View>
         )}

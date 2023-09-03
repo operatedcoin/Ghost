@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { Audio } from 'expo-av';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,6 +8,7 @@ type AudioPlayerProps = {
   trackTitle: string;
   onPlay: () => void;
   onPause: () => void;
+  onAudioLoaded?: (loaded: boolean) => void; 
 };
 
 function formatTime(milliseconds: number) {
@@ -23,11 +24,17 @@ const CollectAudioPlayer = forwardRef((props: AudioPlayerProps, ref) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState<number | null>(null);
   const [position, setPosition] = useState<number | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   async function loadAudio() {
     try {
       const { sound: newSound } = await Audio.Sound.createAsync(audioFile);
       setSound(newSound);
+      setIsLoaded(true);  // Indicate that the audio is loaded
+
+      if (props.onAudioLoaded) {
+        props.onAudioLoaded(true);
+      }
 
       newSound.setOnPlaybackStatusUpdate((status) => {
         if (status.isLoaded) {
@@ -75,6 +82,10 @@ const CollectAudioPlayer = forwardRef((props: AudioPlayerProps, ref) => {
     }
   }
 
+  useImperativeHandle(ref, () => ({
+    playAudio: playAudioHelper
+  }));
+
   useEffect(() => {
     loadAudio();
   }, []);
@@ -95,17 +106,17 @@ const CollectAudioPlayer = forwardRef((props: AudioPlayerProps, ref) => {
   }
 
   return (
-    <View className="flex-row bg-white w-full rounded-lg space-x-3">
+    <View className="flex-row space-x-3">
       <TouchableOpacity onPress={toggleAudio}>
-        <View className="flex justify-center h-12 w-12 rounded-full items-center bg-green-500">
+        <View className="flex justify-center h-9 w-9 rounded-full items-center bg-white pl-1">
           {isPlaying ? (
-            <Ionicons name="ios-pause" size={30} color="white" />
+            <Ionicons name="ios-pause" size={25} color="#22C55E" />
           ) : (
-            <Ionicons name="play" size={30} color="white" />
+            <Ionicons name="play" size={25} color="#22C55E" />
           )}
         </View>
       </TouchableOpacity>
-      <View className="flex-col justify-center grow">
+      {/* <View className="flex-col justify-center grow">
         <Text className="font-bold">{trackTitle}</Text>
         <View className="w-full bg-gray-100 rounded-lg h-2 mt-2">
           <View
@@ -118,8 +129,8 @@ const CollectAudioPlayer = forwardRef((props: AudioPlayerProps, ref) => {
           <View className="grow" />
           <Text className="text-xs  text-neutral-500">{formatTime(duration - position)}</Text>
         </View>
-      </View>
-    </View>
+      </View>*/}
+    </View> 
   );
 });
 

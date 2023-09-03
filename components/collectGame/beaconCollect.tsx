@@ -1,6 +1,6 @@
-    import React, { useState, useEffect } from 'react';
+    import React, { useState, useEffect, useRef } from 'react';
     import { View, Text, TouchableOpacity } from 'react-native';
-    import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+    import { NavigationContainer, useFocusEffect, useIsFocused } from '@react-navigation/native';
     import { createNativeStackNavigator } from '@react-navigation/native-stack';
     import CircleComponent from './circleComponent';
     import useBLE from '../useBLE';
@@ -11,12 +11,33 @@
     import CollectAudioPlayer from './collectAudioPlayer';
     import LoadingSpinner from './loadingSpinner';
     import * as Haptics from 'expo-haptics';
+    import { Audio } from 'expo-av';
 
     const Stack = createNativeStackNavigator();
 
-    function MainScreen({ navigation, beaconData, goToHome }) {
+    function MainScreen({ navigation, beaconData, goToHome, onWeedsCollected }) {
     const [tappedBeacons, setTappedBeacons] = useState([]);
     const { nearestDevice, scanForPeripherals, requestPermissions, stopScanning } = useBLE();
+    const [sound, setSound] = useState<Audio.Sound | null>(null);
+    const isFocused = useIsFocused();
+
+    const playInactiveAudio = async (audioPath) => {
+        if (sound) {
+            await sound.stopAsync();
+            await sound.unloadAsync();
+          }
+        const { sound: newSound } = await Audio.Sound.createAsync(audioPath);
+        setSound(newSound);
+        await newSound.playAsync();
+      };
+
+      useEffect(() => {
+        return sound
+          ? () => {
+              sound.unloadAsync();
+            }
+          : undefined;
+      }, [sound]);
 
     // Request permissions and initiate scanning for devices
     useFocusEffect(
@@ -37,9 +58,19 @@
 
     const handleCirclePress = (beaconName) => {
         const currentBeaconData = beaconData[beaconName];
+
+            // Stop any playing audio
+            if (sound) {
+                sound.stopAsync();
+            }
     
-        if (!tappedBeacons.includes(beaconName)) {
-        setTappedBeacons(prev => [...prev, beaconName]);
+            if (!tappedBeacons.includes(beaconName)) {
+                setTappedBeacons(prev => [...prev, beaconName]);
+        
+                // Check if onWeedsCollected is a function before calling it
+                if (typeof onWeedsCollected === 'function') {
+                    onWeedsCollected(tappedBeacons.length + 1);
+                }
     
         navigation.navigate('LoadingScreen');
         
@@ -82,7 +113,8 @@
 
             <View className="grow" />
             
-            <Text className="text-green-500 text-xl font-bold pb-4">{`${tappedBeacons.length} out of 7 Weeds collected`}</Text>
+            <Text className="text-green-500 text-xl font-bold">{`${tappedBeacons.length} out of 7 Weeds collected`}</Text>
+            <Text className="text-neutral-400 text-center text-xs pt-2 pb-4">Hint: Tap an uncollected weed for a location clue</Text>
             <View className="flex flex-row flex-wrap w-full">
                 {targetDevices.map(device => (
                     <View className="w-1/4" key={device}>
@@ -90,7 +122,10 @@
                             beaconName={device}
                             isActive={nearestDevice === device}
                             onPress={handleCirclePress}
+                            playInactiveAudio={playInactiveAudio}
+                            beaconData={beaconData}
                         />
+
                     </View>
                 ))}
             </View>
@@ -99,7 +134,7 @@
             
             {tappedBeacons.length === 7 && 
                 <TouchableOpacity className="bg-black p-3 mb-3 w-full items-center rounded-xl" onPress={goToHome}>
-                    <Text className="text-white">Continue</Text>
+                    <Text className="text-white">Synthesise results</Text>
                 </TouchableOpacity>
             }
         </View>
@@ -144,6 +179,9 @@
     const { beaconName, beaconDescription, beaconWeight, beaconHeight, beaconOrigin, audioFilePath, trackTitle } = route.params;
     
     const [audioPlaying, setAudioPlaying] = useState(false);
+    const audioPlayerRef = useRef(null);
+    const [audioLoaded, setAudioLoaded] = useState(false);
+
 
     const handleAudioPlay = () => {
         setAudioPlaying(true);
@@ -153,17 +191,33 @@
         setAudioPlaying(false);
     };
 
+    useEffect(() => {
+        if (audioLoaded) {
+          audioPlayerRef.current?.playAudio();
+        }
+      }, [audioLoaded]);
+      
     return (
-        <View className="flex-1 flex-col justify-between mx-4 mt-3 mb-10 p-3 bg-green-500 rounded-xl items-center">
-            <View className="flex flex-row justify-between items-baseline">
+        <View className="flex-1 flex-col justify-between mx-4 mt-3 mb-6 p-3 bg-green-500 rounded-xl items-center">
+            <View className="flex flex-row justify-between items-center">
                 <TouchableOpacity className="flex-row" onPress={()=> navigation.navigate('Main')}>
                 <Ionicons name="chevron-back" size={24} color="white" />    
                 <Text className="text-white text-lg">Back</Text>
                 </TouchableOpacity>
                 <View className='grow' />
+                <View>
+                    <CollectAudioPlayer
+                    ref={audioPlayerRef} 
+                    audioFile={audioFilePath} 
+                    trackTitle={trackTitle} 
+                    onPlay={handleAudioPlay} 
+                    onPause={handleAudioPause}
+                    onAudioLoaded={setAudioLoaded} 
+                    />
+                </View>
             </View>
             
-            <View className="flex-col bg-green-600 p-3 w-full grow my-3 rounded-lg">
+            <View className="flex-col bg-green-600 p-3 w-full grow mt-3 rounded-lg">
                 <View className="flex-row justify-between ">
                     <View className="pt-2 mr-2"><WeedIcon size={100} fill="white" /></View>
                     <View className="grow">
@@ -190,22 +244,12 @@
                     <Text className="text-white text-xs">{beaconDescription}</Text>
                 </View>    
             </View>
-
-            <View className="flex-row bg-white p-3 w-full rounded-lg space-x-3">
-                <CollectAudioPlayer 
-                audioFile={audioFilePath} 
-                trackTitle={trackTitle} 
-                onPlay={handleAudioPlay} 
-                onPause={handleAudioPause}
-                />
-            </View>
-
-
         </View>
     );
     }
 
     function BeaconCollect({ beaconData, goToHome }) {
+        
     return (
         <NavigationContainer independent={true}>
         <Stack.Navigator initialRouteName="Main" screenOptions={{gestureEnabled: false, animation: 'simple_push', animationDuration: 200}}>

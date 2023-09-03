@@ -1,22 +1,19 @@
 import { Audio } from 'expo-av';
 
-let activeSound = null;
-let lastPlayedFile = null;
+const activeSounds = {};
 
-export const playAudio = async (audioFile) => {
-    if (activeSound) {
-        await activeSound.unloadAsync();
-        activeSound = null;
+export const playAudio = async (audioFile, key) => {
+    if (activeSounds[key]) {
+        await activeSounds[key].unloadAsync();
     }
     
     const { sound } = await Audio.Sound.createAsync(audioFile, { shouldPlay: true, isLooping: true });
-    activeSound = sound;
-    lastPlayedFile = audioFile;
+    activeSounds[key] = sound;
 };
 
-export const stopAudio = async () => {
-    if (activeSound) {
-        await activeSound.unloadAsync();
-        activeSound = null;
+export const stopAudio = async (key) => {
+    if (activeSounds[key]) {
+        await activeSounds[key].unloadAsync();
+        delete activeSounds[key];
     }
 };

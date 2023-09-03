@@ -6,11 +6,22 @@ import TimerComponent from '../components/timerComponent';
 import BottomSheetModal from '../components/bottomSheet';
 import { useIsFocused } from '@react-navigation/native';
 import BeaconFTB from '../components/beaconFTB';
-
+import LoadingSpinner from '../components/collectGame/loadingSpinner';
 
 const ios = Platform.OS === 'ios';
 
-export default function ChapterOne({ navigation }) {
+const beaconsData = [
+  {
+    beaconName: "MsgFive",
+    beaconTitle: "Story Dot #1",
+    trackTitle: "Conspiracy",
+    audioName: "conspiracyV4.mp3",
+    bgColor: "bg-purple-500"
+  },
+  // Add other beacons as needed...
+];
+
+export default function ChapterSix({ navigation }) {
   const isFocused = useIsFocused();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [isHeaderModalVisible, setHeaderModalVisible] = useState(false);
@@ -19,10 +30,10 @@ export default function ChapterOne({ navigation }) {
   useEffect(() => {
     if (isFocused) {
       setTimeout(() => {
-        playAudio(require('../audio/beatTwoSetUp.m4a'));
+        playAudio(require('../audio/beatThreeTask.m4a'));
       });
     } else {
-      stopAudio(require('../audio/beatTwoSetUp.m4a'));
+      stopAudio();
     }
 }, [isFocused]);
 
@@ -46,19 +57,18 @@ export default function ChapterOne({ navigation }) {
      <View className="grow"></View>  
 
 
+     <View className="my-8">
+        <TimerComponent duration={51} nextScreen="ChapterFour" navigation={navigation} />
+    </View> 
 
+    <View className="grow"></View> 
 
-        <View className="bg-white mx-4 p-4 rounded-xl">
-          <Text className="text-neutral-900 text-center text-2xl font-bold mb-4">If you can't help or you're not willing to help, give this device back to the person that gave it to you.</Text>
-          
-          <TouchableOpacity className="bg-green-500 p-3 mb-3 w-full items-center rounded-xl" onPress={()=> navigation.navigate('ChapterTwo')}>
-            <Text className="text-white">I'm willing to help</Text>
-          </TouchableOpacity>    
-          
-        </View>
+    <View className="bg-white mx-4 p-4 rounded-xl">
+      <Text className="text-neutral-900 text-center text-2xl font-bold">Task 1</Text>
+      <Text className="text-neutral-900 text-center text-xs pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor ipsum at arcu condimentum, sed fermentum turpis aliquam. Fusce a dui egestas</Text>
+    </View>
 
-          
-        <View className="grow"></View>  
+    <BeaconFTB beacons={beaconsData} />
 
      </View>
 
@@ -68,15 +78,3 @@ export default function ChapterOne({ navigation }) {
    
   )
 }
-
-
-    //<TimerComponent isModalVisible={isBottomSheetVisible || isHeaderModalVisible} duration={10} nextScreen="ChapterTwo" />
-
-  //   <BottomSheetModal
-  //   isVisible={isBottomSheetVisible} 
-  //   onClose={() => setBottomSheetVisible(false)}
-  //   title="Find somewhere quiet."
-  //   content="When you're alone. When you're safe. Click below."
-  // />
-
-  
