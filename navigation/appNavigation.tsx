@@ -8,6 +8,7 @@ import ChapterThree from '../screens/ChapterThree';
 import ChapterFour from '../screens/ChapterFour';
 import ChapterFive from '../screens/ChapterFive';
 import ChapterSix from '../screens/ChapterSix';
+import ChapterSeven from '../screens/ChapterSeven';
 import FailedScreen from '../screens/FailedScreen';
 
 
@@ -19,6 +20,7 @@ export type RootStackParamList = {
   ChapterFour: undefined;
   ChapterFive: undefined;
   ChapterSix: undefined;
+  ChapterSeven: undefined;
   Failed: undefined;
 };
 
@@ -35,6 +37,7 @@ export default function AppNavigation() {
         <Stack.Screen name="ChapterFour" options={{headerShown: false}} component={ChapterFour}  />
         <Stack.Screen name="ChapterFive" options={{headerShown: false}} component={ChapterFive}  />
         <Stack.Screen name="ChapterSix" options={{headerShown: false}} component={ChapterSix}  />
+        <Stack.Screen name="ChapterSeven" options={{headerShown: false}} component={ChapterSeven}  />
         <Stack.Screen name="Failed" options={{headerShown: false}} component={FailedScreen}  />
       </Stack.Navigator>
     </NavigationContainer>

@@ -6,7 +6,7 @@ export const weedsDataLookup = {
       origin: "Bleachers",
       description: "Description for Item One",
       audioFilePath: require("../audio/Weed1.m4a"),
-      inactiveAudioPath: require("../audio/meatballV4.mp3"),
+      inactiveAudioPath: require("../audio/clueWeed1.m4a"),
       trackTitle: "Audio Track Name One"
     },
     MsgTwo: {
@@ -16,7 +16,7 @@ export const weedsDataLookup = {
         origin: "Library",
         description: "Description for Item One",
         audioFilePath: require("../audio/Weed2.m4a"),
-        inactiveAudioPath: require("../audio/meatballV4.mp3"),
+        inactiveAudioPath: require("../audio/clueWeed2.m4a"),
         trackTitle: "Audio Track Name Two"
       },
       MsgThree: {
@@ -26,7 +26,7 @@ export const weedsDataLookup = {
         origin: "Canteen",
         description: "Description for Item One",
         audioFilePath: require("../audio/Weed3.m4a"),
-        inactiveAudioPath: require("../audio/meatballV4.mp3"),
+        inactiveAudioPath: require("../audio/clueWeed3.m4a"),
         trackTitle: "Audio Track Name Three"
       },
       MsgFour: {
@@ -36,7 +36,7 @@ export const weedsDataLookup = {
         origin: "Oval",
         description: "Description for Item One",
         audioFilePath: require("../audio/Weed4.m4a"),
-        inactiveAudioPath: require("../audio/meatballV4.mp3"),
+        inactiveAudioPath: require("../audio/clueWeed4.m4a"),
         trackTitle: "Audio Track Name Four"
       },
       MsgFive: {
@@ -46,7 +46,7 @@ export const weedsDataLookup = {
         origin: "Front Office",
         description: "Description for Item One",
         audioFilePath: require("../audio/Weed5.m4a"),
-        inactiveAudioPath: require("../audio/meatballV4.mp3"),
+        inactiveAudioPath: require("../audio/clueWeed5.m4a"),
         trackTitle: "Audio Track Name Five"
       },
       MsgSix: {
@@ -56,7 +56,7 @@ export const weedsDataLookup = {
         origin: "Toilets",
         description: "Description for Item One",
         audioFilePath: require("../audio/Weed6.m4a"),
-        inactiveAudioPath: require("../audio/meatballV4.mp3"),
+        inactiveAudioPath: require("../audio/clueWeed6.m4a"),
         trackTitle: "Audio Track Name Six"
       },
       MsgSeven: {
@@ -66,7 +66,7 @@ export const weedsDataLookup = {
         origin: "Bubblers",
         description: "Description for Item One",
         audioFilePath: require("../audio/Weed7.m4a"),
-        inactiveAudioPath: require("../audio/meatballV4.mp3"),
+        inactiveAudioPath: require("../audio/clueWeed7.m4a"),
         trackTitle: "Audio Track Name Seven"
       },
     // ... other beacon data

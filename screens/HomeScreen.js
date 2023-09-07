@@ -1,6 +1,6 @@
 import { View, Text, Platform, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { playAudio, stopAudio } from '../components/backgroundAudioHelper';
+import { playAudio, stopAudio, fadeOutAndStopAudio } from '../components/backgroundAudioHelper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useIsFocused } from '@react-navigation/native';
@@ -18,11 +18,12 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     // Listener for navigation state changes
     const unsubscribe = nav.addListener('state', (e) => {
-      // Check if the current screen is 'ChapterFour'
-      if (e.data.state.routes[e.data.state.index].name === 'ChapterFour') {
-        stopAudio('background'); // Stop the new background audio
+      // For React Navigation v5
+      const currentRoute = e.data.state.routes[e.data.state.index];
+      if (currentRoute && currentRoute.name === 'ChapterTwo') {
+          fadeOutAndStopAudio('background');
       }
-    });
+  });
 
     // Cleanup listener on component unmount
     return unsubscribe;
@@ -37,7 +38,7 @@ export default function HomeScreen({ navigation }) {
 
   useEffect(() => {
     if (isFocused) {
-      playAudio(require('../audio/MysteryPulse.mp3'), 'background'); // Play the new background audio when HomeScreen is focused
+      playAudio(require('../audio/MysteryTheme.mp3'), 'background'); // Play the new background audio when HomeScreen is focused
     }
     // No need to stop the new background audio here, it will be stopped by the navigation listener when 'ChapterFour' is reached
   }, [isFocused]);

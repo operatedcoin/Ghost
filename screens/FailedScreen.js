@@ -14,6 +14,13 @@ export default function FailedScreen({ navigation }) {
   const isFocused = useIsFocused();
   const nav = useNavigation();
 
+  useFocusEffect(
+    React.useCallback(() => {
+      playAudio(require('../audio/oathDrone.wav'), 'drone');
+      return () => stopAudio('drone'); // This stops 'beatOneHello.m4a' when navigating away from HomeScreen
+    }, [])
+  );
+
   return (
     <View className="flex-1 bg-neutral-900">
       <SafeAreaView className={ios? "-mb-2": "mb-3"}>
@@ -24,10 +31,16 @@ export default function FailedScreen({ navigation }) {
         <View className="pt-2 mr-2"><WeedIcon size={100} fill="white" /></View>
           
               <Text className="text-neutral-50 text-2xl font-bold text-center">
-              You have failed.
+              You didn't make it in time{"\n"}The weeds have spread{"\n"}Please return the Bioscanner
               </Text>
               
           <View className="grow" />
+
+          <View className="grow" />
+
+          <TouchableOpacity className="bg-green-500 p-3 mb-6 w-full items-center rounded-xl" onPress={() => navigation.navigate('Home')}>
+            <Text className="text-white">Bioscanner has been returned</Text>
+          </TouchableOpacity>
 
           
            

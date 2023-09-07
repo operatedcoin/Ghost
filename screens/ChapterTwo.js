@@ -1,12 +1,14 @@
 import { View, Text, Platform, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { playAudio, stopAudio } from '../components/backgroundAudioHelper';
+import { playAudio, stopAudio, fadeOutAndStopAudio } from '../components/backgroundAudioHelper';
 import Header from '../components/header';
 import TimerComponent from '../components/timerComponent';
 import BottomSheetModal from '../components/bottomSheet';
 import { useIsFocused } from '@react-navigation/native';
 import BeaconFTB from '../components/beaconFTB';
 import LoadingSpinner from '../components/collectGame/loadingSpinner';
+import { useFocusEffect } from '@react-navigation/native';
+
 
 const ios = Platform.OS === 'ios';
 
@@ -16,15 +18,12 @@ export default function ChapterTwo({ navigation }) {
   const [isHeaderModalVisible, setHeaderModalVisible] = useState(false);
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
 
-  useEffect(() => {
-    if (isFocused) {
-      setTimeout(() => {
-        playAudio(require('../audio/beatThreeTask.m4a'));
-      });
-    } else {
-      stopAudio();
-    }
-}, [isFocused]);
+  useFocusEffect(
+    React.useCallback(() => {
+      playAudio(require('../audio/beatThreeTask.m4a'), 'three');
+      return () => stopAudio('three'); // This stops 'beatOneHello.m4a' when navigating away from HomeScreen
+    }, [])
+  );
 
   useEffect(() => {
     if (isFirstLoad) {
@@ -53,7 +52,7 @@ export default function ChapterTwo({ navigation }) {
         <View className="bg-white mx-4 p-4 rounded-xl items-center">
         
         <View className="mb-4"><LoadingSpinner /></View>
-        <Text className="text-neutral-400 text-2xl text-center">Activating Bioscanner...</Text>
+        <Text className="text-neutral-400 text-2xl text-center">Activating Bioscanner</Text>
       
         </View>
 

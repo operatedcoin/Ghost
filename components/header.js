@@ -14,9 +14,9 @@ export default function Header({ isModalVisible, setModalVisible }) {
         <View className="flex-row justify-between items-center mx-4">
           <Text className="text-neutral-900 text-2xl font-bold">
               Green Thumb</Text>
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
+        {/* <TouchableOpacity onPress={() => setModalVisible(true)}>
           <Ionicons name="information-circle-outline" size={24} color="black" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         </View>
 
           {/* Modal */}

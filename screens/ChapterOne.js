@@ -5,6 +5,7 @@ import Header from '../components/header';
 import TimerComponent from '../components/timerComponent';
 import BottomSheetModal from '../components/bottomSheet';
 import { useIsFocused } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import BeaconFTB from '../components/beaconFTB';
 
 
@@ -16,15 +17,12 @@ export default function ChapterOne({ navigation }) {
   const [isHeaderModalVisible, setHeaderModalVisible] = useState(false);
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
 
-  useEffect(() => {
-    if (isFocused) {
-      setTimeout(() => {
-        playAudio(require('../audio/beatTwoSetUp.m4a'));
-      });
-    } else {
-      stopAudio(require('../audio/beatTwoSetUp.m4a'));
-    }
-}, [isFocused]);
+  useFocusEffect(
+    React.useCallback(() => {
+      playAudio(require('../audio/beatTwoSetUp.m4a'), 'two');
+      return () => stopAudio('two'); // This stops 'beatOneHello.m4a' when navigating away from HomeScreen
+    }, [])
+  );
 
   useEffect(() => {
     if (isFirstLoad) {

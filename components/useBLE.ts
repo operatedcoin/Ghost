@@ -17,7 +17,7 @@ interface BluetoothLowEnergyApi {
   nearestDevice: string | null;
 }
 
-export const targetDevices = ['MsgOne', 'MsgTwo', 'MsgThree', 'MsgFour', 'MsgFive', 'MsgSix','MsgSeven'];
+export const targetDevices = ['MsgOne', 'MsgTwo', 'MsgThree', 'MsgFour', 'MsgFive', 'MsgSix','MsgSeven','MsgEight'];
 
 function useBLE(): BluetoothLowEnergyApi {
   const [distance, setDistance] = useState<number>(-1);

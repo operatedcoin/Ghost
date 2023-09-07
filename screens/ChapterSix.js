@@ -7,15 +7,19 @@ import BottomSheetModal from '../components/bottomSheet';
 import { useIsFocused } from '@react-navigation/native';
 import BeaconFTB from '../components/beaconFTB';
 import LoadingSpinner from '../components/collectGame/loadingSpinner';
+import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
+
+
 
 const ios = Platform.OS === 'ios';
 
 const beaconsData = [
   {
-    beaconName: "MsgFive",
-    beaconTitle: "Story Dot #1",
-    trackTitle: "Conspiracy",
-    audioName: "conspiracyV4.mp3",
+    beaconName: "MsgEight",
+    // beaconTitle: "Story Dot #1",
+    // trackTitle: "Conspiracy",
+    // audioName: "conspiracyV4.mp3",
     bgColor: "bg-purple-500"
   },
   // Add other beacons as needed...
@@ -27,15 +31,12 @@ export default function ChapterSix({ navigation }) {
   const [isHeaderModalVisible, setHeaderModalVisible] = useState(false);
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
 
-  useEffect(() => {
-    if (isFocused) {
-      setTimeout(() => {
-        playAudio(require('../audio/beatThreeTask.m4a'));
-      });
-    } else {
-      stopAudio();
-    }
-}, [isFocused]);
+  useFocusEffect(
+    React.useCallback(() => {
+      playAudio(require('../audio/MysteryPulse.mp3'), 'pulse');
+      return () => stopAudio('pulse'); // This stops 'beatOneHello.m4a' when navigating away from HomeScreen
+    }, [])
+  );
 
   useEffect(() => {
     if (isFirstLoad) {
@@ -58,14 +59,14 @@ export default function ChapterSix({ navigation }) {
 
 
      <View className="my-8">
-        <TimerComponent duration={51} nextScreen="ChapterFour" navigation={navigation} />
+        <TimerComponent duration={15} nextScreen="Failed" navigation={navigation} />
     </View> 
 
     <View className="grow"></View> 
 
     <View className="bg-white mx-4 p-4 rounded-xl">
-      <Text className="text-neutral-900 text-center text-2xl font-bold">Task 1</Text>
-      <Text className="text-neutral-900 text-center text-xs pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor ipsum at arcu condimentum, sed fermentum turpis aliquam. Fusce a dui egestas</Text>
+      <Text className="text-neutral-900 text-center text-2xl font-bold">Go to XXXXX location.</Text>
+      <Text className="text-neutral-900 text-center text-xs pt-2">Look inside and scan the source before it's too late!</Text>
     </View>
 
     <BeaconFTB beacons={beaconsData} />

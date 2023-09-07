@@ -1,4 +1,4 @@
-import { View, Text, Platform } from 'react-native'
+import { View, Text, Platform, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { playAudio, stopAudio } from '../components/backgroundAudioHelper';
 import Header from '../components/header';
@@ -7,6 +7,10 @@ import BottomSheetModal from '../components/bottomSheet';
 import { useIsFocused } from '@react-navigation/native';
 import { weedsDataLookup } from '../beaconData/weedsData';
 import BeaconCollect from '../components/collectGame/beaconCollect';
+import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
+
+
 
 const ios = Platform.OS === 'ios';
 
@@ -17,20 +21,19 @@ export default function ChapterFour({ navigation }) {
   const [isHeaderModalVisible, setHeaderModalVisible] = useState(false);
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
   const [collectedWeedsCount, setCollectedWeedsCount] = useState(0);
+  const nav = useNavigation();
 
   const handleGoToHome = () => {
     navigation.navigate('ChapterFive');
   };
 
-  useEffect(() => {
-    if (isFocused) {
-      setTimeout(() => {
-        playAudio(require('../audio/MysteryLight.mp3'));
-      });
-    } else {
-      stopAudio(require('../audio/MysteryLight.mp3'));
-    }
-}, [isFocused]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      playAudio(require('../audio/MysteryLight.mp3'), 'four');
+      return () => stopAudio('four'); // This stops 'beatOneHello.m4a' when navigating away from HomeScreen
+    }, [])
+  );
 
   useEffect(() => {
     if (isFirstLoad) {
@@ -61,7 +64,18 @@ export default function ChapterFour({ navigation }) {
           isModalVisible={isBottomSheetVisible || isHeaderModalVisible} 
           duration={540} nextScreen="Failed"  
           navigation={navigation}/>
+          <View className="grow"></View>
+
+<View className="mx-4 p-4 items-center">
+
+  
+  <TouchableOpacity onPress={()=> navigation.replace('ChapterFive')}>
+  <Text className="text-neutral-400 text-xs">Skip</Text>
+  </TouchableOpacity>
+  </View>  
     </View>
+
+
         <View className="bg-white mx-4 p-4 rounded-xl">
           <Text className="text-neutral-900 text-center text-2xl font-bold">Collect the Weeds</Text>
           <Text className="text-neutral-900 text-center text-xs pt-2">Hold the device close the centre of the weeds to collect a sample.</Text>
@@ -77,12 +91,16 @@ export default function ChapterFour({ navigation }) {
         isVisible={isBottomSheetVisible} 
         onClose={() => setBottomSheetVisible(false)}
         title="Stop the Spread!"
-        content="Sources say we have 9 minutes before the infestation grown. Collect the samples before the timer runs out."
+        content="Sources say we have 9 minutes before the infestation grows. Collect the samples before the timer runs out."
       />
-          
+
      </View>  
 
+     
+
   </View>
+
+  
       
 
    

@@ -108,8 +108,18 @@ export default function ChapterThree({ navigation }) {
         title="Chapter Title Here"
         content="Some description or instruction text here"
       />
+
+<View className="grow"></View>
+
+<View className="mx-4 p-4 items-center">
+  <TouchableOpacity onPress={()=> navigation.replace('ChapterFour')}>
+  <Text className="text-neutral-400 text-xs">Skip</Text>
+  </TouchableOpacity>
+  </View>  
           
      </View>  
+
+     
 
   </View>
       
