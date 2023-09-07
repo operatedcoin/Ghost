@@ -20,6 +20,7 @@
     const { nearestDevice, scanForPeripherals, requestPermissions, stopScanning } = useBLE();
     const [sound, setSound] = useState<Audio.Sound | null>(null);
     const isFocused = useIsFocused();
+    
 
     const playInactiveAudio = async (audioPath) => {
         if (sound) {
@@ -116,7 +117,9 @@
             <Text className="text-green-500 text-xl font-bold">{`${tappedBeacons.length} out of 7 Weeds collected`}</Text>
             <Text className="text-neutral-400 text-center text-xs pt-2 pb-4">Hint: Tap an uncollected weed for a location clue</Text>
             <View className="flex flex-row flex-wrap w-full">
-                {targetDevices.map(device => (
+                {targetDevices
+                    .filter(device => device !== 'MsgEight')
+                    .map(device => (
                     <View className="w-1/4" key={device}>
                         <CircleComponent
                             beaconName={device}

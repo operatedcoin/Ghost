@@ -23,6 +23,7 @@ export default function ChapterFour({ navigation }) {
   const [collectedWeedsCount, setCollectedWeedsCount] = useState(0);
   const nav = useNavigation();
 
+
   const handleGoToHome = () => {
     navigation.navigate('ChapterFive');
   };
