@@ -37,14 +37,18 @@ export default function ChapterSeven({ navigation }) {
             <WeedIcon size={100} fill="white" />
           </View>
 
-          <Text className="text-neutral-50 text-2xl font-bold text-center">
-            SOURCE DETECTED{"\n"}You did it!{"\n"}Return the Bioscanner
+          <Text className="text-neutral-50 text-2xl font-bold text-center mb-3">
+            SOURCE DETECTED
           </Text>
 
+          <Text className="text-neutral-50 text-lg text-center">
+          You did it!{"\n"}Please return the device.
+          </Text>
+          
           <View className="grow" />
 
-          <TouchableOpacity className="bg-green-500 p-3 mb-6 w-full items-center rounded-xl" onPress={() => navigation.navigate('Home')}>
-            <Text className="text-white">Bioscanner has been returned</Text>
+          <TouchableOpacity className="mb-6 w-full items-center rounded-xl" onPress={() => navigation.navigate('Home')}>
+            <Text className="text-neutral-700 text-xs">Bioscanner has been returned</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

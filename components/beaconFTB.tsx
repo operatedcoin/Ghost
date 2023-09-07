@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Animated, Easing, Button } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import WeedIcon from './collectGame/weedIcon';
 import useBLE from './useBLE';
 import AudioPlayer from './audioPlayer';
 import ScanIndicator from './scanIndicator';
@@ -86,15 +87,20 @@ useEffect(() => {
     <>
       {visibleBeacons.length > 0 && visibleBeacons[0].beaconName === 'MsgEight' ? (
   <>
-     <View>
-      <Button
-        title="Extract Source DNA"
-        onPress={() => {
-          (navigation as any).replace('ChapterSeven');
-        }}
-      />
-    </View>
-   
+  <View className={`flex-col justify-end mx-4 mt-3 mb-10 p-2 bg-green-500 rounded-xl items-center basis-1/3`}>
+          <View className="grow">
+            <View className="flex-row bg-white rounded-full p-1 px-2 items-center justify-center">
+            <ScanIndicator />
+              <Text className="text-black text-[10px]">Scanning</Text>
+            </View>
+          </View>
+          <View className="pb-4"><WeedIcon size={50} fill="#ffffff"/></View>
+          <Text className="text-white font-bold pb-1">The Source Weed is Detected</Text>
+          <View className="grow"></View>
+          <TouchableOpacity className="bg-black p-3 w-full items-center rounded-xl"  onPress={() => {(navigation as any).replace('ChapterSeven');}}>
+            <Text className="text-white">Extract Source DNA</Text>
+          </TouchableOpacity>   
+        </View>   
   </>
 ) : visibleBeacons.length > 0 ? (
         <View className={`flex-col justify-end mx-4 mt-3 mb-10 p-2 bg-neutral-700 rounded-xl items-center basis-1/3`}>
@@ -118,7 +124,7 @@ useEffect(() => {
             </View>
           </View>
           <View className="pb-4"><Ionicons name="radio" size={30} style={{ color: 'rgb(163, 163, 163)' }} /></View>
-          <Text className="text-neutral-400 font-bold pb-1">No weed is detected.</Text>
+          <Text className="text-neutral-400 font-bold pb-1">No weeds are detected.</Text>
           <Text className="text-neutral-400 text-xs">Keep searching.</Text>
           <View className="grow"></View>
         </View>

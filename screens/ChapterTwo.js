@@ -61,7 +61,7 @@ export default function ChapterTwo({ navigation }) {
 
         <View className="mx-4 p-4 items-center">
           <TouchableOpacity onPress={()=> navigation.replace('ChapterFour')}>
-          <Text className="text-neutral-400 text-xs">Skip</Text>
+          <Text className="text-neutral-200 text-xs">Skip</Text>
           </TouchableOpacity>
           </View>  
 

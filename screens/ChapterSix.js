@@ -34,7 +34,14 @@ export default function ChapterSix({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       playAudio(require('../audio/MysteryPulse.mp3'), 'pulse');
-      return () => stopAudio('pulse'); // This stops 'beatOneHello.m4a' when navigating away from HomeScreen
+      return () => stopAudio('pulse'); //
+    }, [])
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      playAudio(require('../audio/beatOneHello.m4a'), 'narration');
+      return () => stopAudio('narration'); //
     }, [])
   );
 

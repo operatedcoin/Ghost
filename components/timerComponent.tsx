@@ -18,7 +18,6 @@ function formatTime(seconds) {
   }
 
   const TimerComponent: React.FC<TimerComponentProps> = ({ duration, nextScreen, isModalVisible, navigation }) => {
-    console.log(navigation);
     const [timeLeft, setTimeLeft] = useState(duration);
 
     useEffect(() => {

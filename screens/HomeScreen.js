@@ -23,7 +23,10 @@ export default function HomeScreen({ navigation }) {
       if (currentRoute && currentRoute.name === 'ChapterTwo') {
           fadeOutAndStopAudio('background');
       }
-  });
+      if (currentRoute && currentRoute.name === 'ChapterFour') {
+          stopAudio('oathDrone'); // Stop the oathDrone audio when ChapterFour is reached
+      }
+    });
 
     // Cleanup listener on component unmount
     return unsubscribe;
@@ -39,6 +42,7 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     if (isFocused) {
       playAudio(require('../audio/MysteryTheme.mp3'), 'background'); // Play the new background audio when HomeScreen is focused
+      playAudio(require('../audio/oathDrone.wav'), 'oathDrone'); // Play the oathDrone audio when HomeScreen is focused
     }
     // No need to stop the new background audio here, it will be stopped by the navigation listener when 'ChapterFour' is reached
   }, [isFocused]);

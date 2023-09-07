@@ -32,7 +32,7 @@ export default function ChapterFour({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       playAudio(require('../audio/MysteryLight.mp3'), 'four');
-      return () => stopAudio('four'); // This stops 'beatOneHello.m4a' when navigating away from HomeScreen
+      return () => stopAudio('four'); 
     }, [])
   );
 
@@ -63,17 +63,13 @@ export default function ChapterFour({ navigation }) {
      <View className="my-8">
       <TimerComponent 
           isModalVisible={isBottomSheetVisible || isHeaderModalVisible} 
-          duration={540} nextScreen="Failed"  
+          duration={10} nextScreen="Failed"  
           navigation={navigation}/>
-          <View className="grow"></View>
-
-<View className="mx-4 p-4 items-center">
-
-  
-  <TouchableOpacity onPress={()=> navigation.replace('ChapterFive')}>
-  <Text className="text-neutral-400 text-xs">Skip</Text>
-  </TouchableOpacity>
-  </View>  
+             <View className="mx-4 p-4 items-center">
+      <TouchableOpacity onPress={()=> navigation.replace('ChapterFive')}>
+      <Text className="text-neutral-200 text-xs">Skip</Text>
+      </TouchableOpacity>
+      </View>  
     </View>
 
 
@@ -96,8 +92,6 @@ export default function ChapterFour({ navigation }) {
       />
 
      </View>  
-
-     
 
   </View>
 
