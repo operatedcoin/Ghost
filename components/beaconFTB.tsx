@@ -6,7 +6,7 @@ import useBLE from './useBLE';
 import AudioPlayer from './audioPlayer';
 import ScanIndicator from './scanIndicator';
 import { useNavigation } from '@react-navigation/native';
-
+import * as Haptics from 'expo-haptics';
 
 interface BeaconInfo {
   beaconName: string;
@@ -67,6 +67,12 @@ useEffect(() => {
 
 }, [beacons, nearestDevice]);
 
+useEffect(() => {
+  if (visibleBeacons.length > 0 && visibleBeacons[0].beaconName === 'MsgEight') {
+    // Trigger haptic feedback when the condition is met
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+  }
+}, [visibleBeacons]);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -125,7 +131,7 @@ useEffect(() => {
             </View>
           </View>
           <View className="pb-4"><Ionicons name="radio" size={30} style={{ color: 'rgb(163, 163, 163)' }} /></View>
-          <Text className="text-neutral-400 font-bold pb-1">SOURCE CURRENTLY UNDETECTED</Text>
+          <Text className="text-neutral-400 font-bold pb-1">Source Currently Undetected</Text>
           <Text className="text-neutral-400 text-xs">Keep searching.</Text>
           <View className="grow"></View>
         </View>

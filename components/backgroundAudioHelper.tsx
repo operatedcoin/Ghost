@@ -8,12 +8,12 @@ const fadeOutInterval = 100; // Decrease volume every 100ms
 const fadeOutStep = currentVolume / (5000 / fadeOutInterval); // 10 seconds = 10000ms
 
 
-export const playAudio = async (audioFile, key) => {
+export const playAudio = async (audioFile, key, shouldLoop = true) => {
     if (activeSounds[key]) {
         await activeSounds[key].unloadAsync();
     }
     
-    const { sound } = await Audio.Sound.createAsync(audioFile, { shouldPlay: true, isLooping: true });
+    const { sound } = await Audio.Sound.createAsync(audioFile, { shouldPlay: true, isLooping: shouldLoop });
     activeSounds[key] = sound;
 };
 

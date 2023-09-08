@@ -75,7 +75,7 @@ export default function ChapterSeven({ navigation }) {
           
           <View className="grow" />
 
-          <TouchableOpacity className="mb-6 w-full items-center rounded-xl" onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity className="mb-6 w-full items-center rounded-xl" onPress={() => {(navigation as any).replace('Home');}}>
             <Text className="text-neutral-700 text-xs">Bioscanner has been returned</Text>
           </TouchableOpacity>
         </View>

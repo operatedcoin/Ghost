@@ -40,7 +40,7 @@ export default function ChapterSix({ navigation }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      playAudio(require('../audio/sourceAudioV2.m4a'), 'narration');
+      playAudio(require('../audio/sourceAudioV2.m4a'), 'narration', false);
       return () => stopAudio('narration'); //
     }, [])
   );
@@ -72,8 +72,8 @@ export default function ChapterSix({ navigation }) {
     <View className="grow"></View> 
 
     <View className="bg-white mx-4 p-4 rounded-xl">
-      <Text className="text-neutral-900 text-center text-2xl font-bold">Sourced Located!{"\n"}FORTIO ITORO</Text>
-      <Text className="text-neutral-900 text-center text-xs pt-2">Head to the 'fortio itori' sign.{"\n"}It's on a wall near the theatrette and is covered with with plants. The Source is growing at its base.{"\n"}Sample the source and stop the spread.</Text>
+      <Text className="text-neutral-900 text-center text-2xl font-bold">Source Located!{"\n"}FORTIOR ITO</Text>
+      <Text className="text-neutral-900 text-center text-xs pt-2">Head to the 'Fortior Ito' sign.{"\n"}It's on a wall near the theatrette and is covered with with plants. The Source is growing at its base.{"\n"}Sample the source and stop the spread.</Text>
     </View>
 
     <BeaconFTB beacons={beaconsData} />
