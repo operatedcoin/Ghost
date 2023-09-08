@@ -38,6 +38,7 @@ const BeaconFTB = ({ beacons }: BeaconFTBProps) => {
 }, [requestPermissions, scanForPeripherals, stopScanning]);
 
 
+
 useEffect(() => {
   console.log("nearestDevice:", nearestDevice);
 
