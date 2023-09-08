@@ -57,7 +57,7 @@ export default function ChapterFive({ navigation }) {
 
         <View className="bg-white mx-4 p-4 rounded-xl items-center">
           <View className="mb-4"><LoadingSpinner /></View>
-          <Text className="text-neutral-400 text-2xl text-center">Synthesising results and locating source infestation.</Text>
+          <Text className="text-neutral-400 text-2xl text-center">Synthesising results{"\n"}Locating source infestation</Text>
         </View>
 
           

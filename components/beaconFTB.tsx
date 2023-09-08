@@ -124,7 +124,7 @@ useEffect(() => {
             </View>
           </View>
           <View className="pb-4"><Ionicons name="radio" size={30} style={{ color: 'rgb(163, 163, 163)' }} /></View>
-          <Text className="text-neutral-400 font-bold pb-1">No weeds are detected.</Text>
+          <Text className="text-neutral-400 font-bold pb-1">SOURCE CURRENTLY UNDETECTED</Text>
           <Text className="text-neutral-400 text-xs">Keep searching.</Text>
           <View className="grow"></View>
         </View>

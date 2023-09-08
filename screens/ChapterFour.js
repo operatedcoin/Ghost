@@ -63,7 +63,7 @@ export default function ChapterFour({ navigation }) {
      <View className="my-8">
       <TimerComponent 
           isModalVisible={isBottomSheetVisible || isHeaderModalVisible} 
-          duration={10} nextScreen="Failed"  
+          duration={540} nextScreen="Failed"  
           navigation={navigation}/>
              <View className="mx-4 p-4 items-center">
       <TouchableOpacity onPress={()=> navigation.replace('ChapterFive')}>
@@ -74,8 +74,8 @@ export default function ChapterFour({ navigation }) {
 
 
         <View className="bg-white mx-4 p-4 rounded-xl">
-          <Text className="text-neutral-900 text-center text-2xl font-bold">Collect the Weeds</Text>
-          <Text className="text-neutral-900 text-center text-xs pt-2">Hold the device close the centre of the weeds to collect a sample.</Text>
+          <Text className="text-neutral-900 text-center text-2xl font-bold">Collect the Samples</Text>
+          <Text className="text-neutral-900 text-center text-xs pt-2">Hold the device close the centre of the weeds.{"\n"} Then tap the weeds icon to collect the sample.</Text>
         </View>
 
         <BeaconCollect 
@@ -88,7 +88,7 @@ export default function ChapterFour({ navigation }) {
         isVisible={isBottomSheetVisible} 
         onClose={() => setBottomSheetVisible(false)}
         title="Stop the Spread!"
-        content="Sources say we have 9 minutes before the infestation grows. Collect the samples before the timer runs out."
+        content="We have 9 minutes before the infestation grows."
       />
 
      </View>  

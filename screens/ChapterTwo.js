@@ -20,7 +20,7 @@ export default function ChapterTwo({ navigation }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      playAudio(require('../audio/beatThreeTask.m4a'), 'three');
+      playAudio(require('../audio/beatThreeTaskV2.m4a'), 'three');
       return () => stopAudio('three'); // This stops 'beatOneHello.m4a' when navigating away from HomeScreen
     }, [])
   );
@@ -46,7 +46,7 @@ export default function ChapterTwo({ navigation }) {
 
 
      <View className="my-8">
-        <TimerComponent duration={51} nextScreen="ChapterFour" navigation={navigation} />
+        <TimerComponent duration={56} nextScreen="ChapterFour" navigation={navigation} />
     </View> 
 
         <View className="bg-white mx-4 p-4 rounded-xl items-center">
