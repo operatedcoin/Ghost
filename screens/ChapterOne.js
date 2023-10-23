@@ -47,7 +47,7 @@ export default function ChapterOne({ navigation }) {
 
 
         <View className="bg-white mx-4 p-4 rounded-xl">
-          <Text className="text-neutral-900 text-center text-2xl font-bold mb-4">If you can't help or you're not willing to help, give this device back to the person that gave it to you.</Text>
+          <Text className="text-neutral-900 text-center text-2xl font-bold mb-4">Test</Text>
           
           <TouchableOpacity className="bg-green-500 p-3 mb-3 w-full items-center rounded-xl" onPress={()=> navigation.navigate('ChapterTwo')}>
             <Text className="text-white">I'm willing to help</Text>
