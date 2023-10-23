@@ -81,9 +81,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.operatedcoin.greenthumb'
+    namespace 'com.operatedcoin.ghoststory'
     defaultConfig {
-        applicationId 'com.operatedcoin.greenthumb'
+        applicationId 'com.operatedcoin.ghoststory'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

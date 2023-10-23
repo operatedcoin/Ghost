@@ -1,4 +1,4 @@
-package com.operatedcoin.greenthumb;
+package com.operatedcoin.ghoststory;
 
 import android.app.Application;
 import android.content.res.Configuration;
