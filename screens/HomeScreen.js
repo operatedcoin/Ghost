@@ -57,7 +57,7 @@ export default function HomeScreen({ navigation }) {
         <View className="pt-2 mr-2"><WeedIcon size={100} fill="white" /></View>
           
               <Text className="text-neutral-50 text-2xl font-bold text-center">
-              Something strange is {"\n"}growing around the campus. {"\n"}Your help is needed.
+             Testy {"\n"}growing around the campus. {"\n"}Your help is needed.
               </Text>
               
           <View className="grow" />

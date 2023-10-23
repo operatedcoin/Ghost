@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Green Thumb",
-    "slug": "green-thumb",
+    "name": "Ghost Story",
+    "slug": "ghost-story",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -37,7 +37,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.operatedcoin.greenthumb"
+      "bundleIdentifier": "com.operatedcoin.ghoststory"
     },
     "android": {
       "adaptiveIcon": {
@@ -49,14 +49,14 @@
         "android.permission.BLUETOOTH_ADMIN",
         "android.permission.BLUETOOTH_CONNECT"
       ],
-      "package": "com.operatedcoin.greenthumb"
+      "package": "com.operatedcoin.ghoststory"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "640314d1-883c-4583-a047-fbdf1071637c"
+        "projectId": "cc6eebe7-6485-4a46-8294-8dcd52d74268"
       }
     }
   }
